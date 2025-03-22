@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-for (let i = 1; i <= 100; i++) {
+for (let i = 1; i <= 20; i++) {
   let str = "";
   if (i % 3 === 0) {
     str += "Fizz";
