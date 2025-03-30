@@ -3,20 +3,20 @@
 import minimist from "minimist";
 import { DateTime as LuxonDateTime } from "luxon";
 
-function createYear(y) {
-  if (y === undefined) {
+function createYear(yeat) {
+  if (yeat === undefined) {
     const today = LuxonDateTime.now().setZone("Asia/Tokyo");
     return today.year;
   } else {
-    return y;
+    return yeat;
   }
 }
-function createMonth(m) {
-  if (m === undefined) {
+function createMonth(month) {
+  if (month === undefined) {
     const today = LuxonDateTime.now().setZone("Asia/Tokyo");
     return today.month;
   } else {
-    return m;
+    return month;
   }
 }
 
