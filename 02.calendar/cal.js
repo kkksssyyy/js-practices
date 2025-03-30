@@ -3,27 +3,27 @@
 import minimist from "minimist";
 import { DateTime as LuxonDateTime } from "luxon";
 
-function createYear(yeat) {
-  if (yeat === undefined) {
+function getYearString(year) {
+  if (year === undefined) {
     const today = LuxonDateTime.now().setZone("Asia/Tokyo");
-    return today.year;
+    return today.year.toString();
   } else {
-    return yeat;
+    return String(year);
   }
 }
-function createMonth(month) {
+function getMonthString(month) {
   if (month === undefined) {
     const today = LuxonDateTime.now().setZone("Asia/Tokyo");
-    return today.month;
+    return today.month.toString();
   } else {
-    return month;
+    return String(month);
   }
 }
 
 const args = minimist(process.argv.slice(2));
 
-const y = createYear(args["y"]);
-const m = createMonth(args["m"]);
+const y = getYearString(args["y"]);
+const m = getMonthString(args["m"]);
 const m_padded = String(m).padStart(2, "0");
 
 // 指定された年月の最初の日を生成
