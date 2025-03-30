@@ -61,7 +61,6 @@ do {
   targetDay = targetDay.plus({ days: 1 });
 } while (targetDay.month === firstDay.month);
 
-const headerString = `      ${month}月 ${year}        
-日 月 火 水 木 金 土  `;
+const headerString = `      ${month}月 ${year}\r` + `日 月 火 水 木 金 土`;
 console.log(headerString);
 console.log(bodyString);
