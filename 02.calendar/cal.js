@@ -3,32 +3,43 @@
 import minimist from "minimist";
 import { DateTime as LuxonDateTime } from "luxon";
 
-function getYearString(year, today) {
+function getYearNumber(year, today) {
   if (year === undefined) {
-    return today.year.toString();
+    return today.year;
   } else {
-    return String(year);
+    return parseInt(year);
   }
 }
-function getMonthString(month, today) {
+function getMonthNumber(month, today) {
   if (month === undefined) {
-    return today.month.toString();
+    return today.month;
   } else {
-    return String(month);
+    return parseInt(month);
   }
+}
+
+function createFirstDay(year, month) {
+  const firstDay = LuxonDateTime.fromObject(
+    {
+      year: parseInt(year),
+      month: parseInt(month),
+      day: 1,
+    },
+    {
+      zone: "Asia/Tokyo",
+    },
+  );
+  return firstDay;
 }
 
 const args = minimist(process.argv.slice(2));
 
 const today = LuxonDateTime.now().setZone("Asia/Tokyo");
 
-const year = getYearString(args["y"], today);
-const month = getMonthString(args["m"], today);
-const mPadded = String(month).padStart(2, "0");
+const year = getYearNumber(args["y"], today);
+const month = getMonthNumber(args["m"], today);
 
-// 指定された年月の最初の日を生成
-const dateString = `${year}-${mPadded}-01`;
-const firstDay = LuxonDateTime.fromISO(dateString, { zone: "Asia/Tokyo" });
+const firstDay = createFirstDay(year, month);
 
 let targetDay = firstDay;
 let bodyString = "";
