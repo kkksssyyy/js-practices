@@ -3,17 +3,15 @@
 import minimist from "minimist";
 import { DateTime as LuxonDateTime } from "luxon";
 
-function getYearString(year) {
+function getYearString(year, today) {
   if (year === undefined) {
-    const today = LuxonDateTime.now().setZone("Asia/Tokyo");
     return today.year.toString();
   } else {
     return String(year);
   }
 }
-function getMonthString(month) {
+function getMonthString(month, today) {
   if (month === undefined) {
-    const today = LuxonDateTime.now().setZone("Asia/Tokyo");
     return today.month.toString();
   } else {
     return String(month);
@@ -22,8 +20,10 @@ function getMonthString(month) {
 
 const args = minimist(process.argv.slice(2));
 
-const y = getYearString(args["y"]);
-const m = getMonthString(args["m"]);
+const today = LuxonDateTime.now().setZone("Asia/Tokyo");
+
+const y = getYearString(args["y"], today);
+const m = getMonthString(args["m"], today);
 const m_padded = String(m).padStart(2, "0");
 
 // 指定された年月の最初の日を生成
