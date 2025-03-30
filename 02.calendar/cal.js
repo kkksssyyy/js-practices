@@ -3,6 +3,23 @@
 import minimist from "minimist";
 import { DateTime as LuxonDateTime } from "luxon";
 
+function createYear(y) {
+  if (y === undefined) {
+    const today = LuxonDateTime.now().setZone("Asia/Tokyo");
+    return today.year;
+  } else {
+    return y;
+  }
+}
+function createMonth(m) {
+  if (m === undefined) {
+    const today = LuxonDateTime.now().setZone("Asia/Tokyo");
+    return today.month;
+  } else {
+    return m;
+  }
+}
+
 const args = minimist(process.argv.slice(2));
 
 const y = createYear(args["y"]);
@@ -38,20 +55,3 @@ const hedderString = `      ${m}月 ${y}
 日 月 火 水 木 金 土  `;
 console.log(hedderString);
 console.log(bodyString);
-
-function createYear(y) {
-  if (y === undefined) {
-    const today = LuxonDateTime.now().setZone("Asia/Tokyo");
-    return today.year;
-  } else {
-    return y;
-  }
-}
-function createMonth(m) {
-  if (m === undefined) {
-    const today = LuxonDateTime.now().setZone("Asia/Tokyo");
-    return today.month;
-  } else {
-    return m;
-  }
-}
