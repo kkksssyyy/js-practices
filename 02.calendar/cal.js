@@ -44,7 +44,6 @@ const firstDay = createFirstDay(year, month);
 let targetDay = firstDay;
 let bodyString = "";
 
-// 最初の週が右詰めになるようにスペースを追加します
 if (targetDay.weekday !== 7) {
   for (let i = 1; i <= targetDay.weekday; i++) {
     bodyString += "   ";
