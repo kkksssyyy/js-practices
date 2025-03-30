@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import minimist from "minimist";
-import { DateTime } from "luxon";
+import { DateTime as LuxonDateTime } from "luxon";
 
 const args = minimist(process.argv.slice(2));
 
@@ -11,7 +11,7 @@ const m_padded = String(m).padStart(2, "0");
 
 // 指定された年月の最初の日を生成
 const dateString = `${y}-${m_padded}-01`;
-const firstDay = DateTime.fromISO(dateString, { zone: "Asia/Tokyo" });
+const firstDay = LuxonDateTime.fromISO(dateString, { zone: "Asia/Tokyo" });
 
 let targetDay = firstDay;
 let bodyString = "";
@@ -41,7 +41,7 @@ console.log(bodyString);
 
 function createYear(y) {
   if (y === undefined) {
-    const today = DateTime.now().setZone("Asia/Tokyo");
+    const today = LuxonDateTime.now().setZone("Asia/Tokyo");
     return today.year;
   } else {
     return y;
@@ -49,7 +49,7 @@ function createYear(y) {
 }
 function createMonth(m) {
   if (m === undefined) {
-    const today = DateTime.now().setZone("Asia/Tokyo");
+    const today = LuxonDateTime.now().setZone("Asia/Tokyo");
     return today.month;
   } else {
     return m;
