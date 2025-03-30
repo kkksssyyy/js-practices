@@ -22,12 +22,12 @@ const args = minimist(process.argv.slice(2));
 
 const today = LuxonDateTime.now().setZone("Asia/Tokyo");
 
-const y = getYearString(args["y"], today);
-const m = getMonthString(args["m"], today);
-const m_padded = String(m).padStart(2, "0");
+const year = getYearString(args["y"], today);
+const month = getMonthString(args["m"], today);
+const mPadded = String(month).padStart(2, "0");
 
 // 指定された年月の最初の日を生成
-const dateString = `${y}-${m_padded}-01`;
+const dateString = `${year}-${mPadded}-01`;
 const firstDay = LuxonDateTime.fromISO(dateString, { zone: "Asia/Tokyo" });
 
 let targetDay = firstDay;
@@ -51,7 +51,7 @@ do {
   targetDay = targetDay.plus({ days: 1 });
 } while (targetDay.month === firstDay.month);
 
-const hedderString = `      ${m}月 ${y}        
+const hedderString = `      ${month}月 ${year}        
 日 月 火 水 木 金 土  `;
 console.log(hedderString);
 console.log(bodyString);
