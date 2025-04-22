@@ -51,12 +51,13 @@ if (targetDay.weekday !== 7) {
 }
 
 do {
-  // 見やすくするためのスペースを追加
-  bodyString += " ";
   bodyString += String(targetDay.day).padStart(2, " ");
   if (targetDay.weekday === 6) {
     // 土曜の場合は改行を追加
     bodyString += "\n";
+  } else {
+    // 見やすくするためのスペースを追加
+    bodyString += " ";
   }
   targetDay = targetDay.plus({ days: 1 });
 } while (targetDay.month === firstDay.month);
