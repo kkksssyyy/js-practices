@@ -36,8 +36,8 @@ const args = minimist(process.argv.slice(2));
 
 const today = LuxonDateTime.now().setZone("Asia/Tokyo");
 
-const year = getYearNumber(args["y"], today);
-const month = getMonthNumber(args["m"], today);
+const year = getYearNumber(args.y, today);
+const month = getMonthNumber(args.m, today);
 
 const firstDay = createFirstDay(year, month);
 
