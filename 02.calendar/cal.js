@@ -4,18 +4,10 @@ import minimist from "minimist";
 import { DateTime as LuxonDateTime } from "luxon";
 
 function getYearNumber(year, today) {
-  if (year === undefined) {
-    return today.year;
-  } else {
-    return parseInt(year);
-  }
+  return year === undefined ? today.year : parseInt(year);
 }
 function getMonthNumber(month, today) {
-  if (month === undefined) {
-    return today.month;
-  } else {
-    return parseInt(month);
-  }
+  return month === undefined ? today.month : parseInt(month);
 }
 
 function createFirstDay(year, month) {
