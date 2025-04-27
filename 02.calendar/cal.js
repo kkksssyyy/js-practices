@@ -41,6 +41,9 @@ const month = getMonthNumber(args["m"], today);
 
 const firstDay = createFirstDay(year, month);
 
+const headerString = `      ${month}月 ${year}\n日 月 火 水 木 金 土`;
+console.log(headerString);
+
 let targetDay = firstDay;
 let bodyString = "";
 
@@ -62,6 +65,4 @@ do {
   targetDay = targetDay.plus({ days: 1 });
 } while (targetDay.month === firstDay.month);
 
-const headerString = `      ${month}月 ${year}\n日 月 火 水 木 金 土`;
-console.log(headerString);
 console.log(bodyString);
