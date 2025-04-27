@@ -53,7 +53,7 @@ if (targetDay.weekday !== 7) {
   }
 }
 
-do {
+while (targetDay.month === firstDay.month) {
   bodyString += String(targetDay.day).padStart(2, " ");
   if (targetDay.weekday === 6) {
     bodyString += "\n";
@@ -61,6 +61,6 @@ do {
     bodyString += " ";
   }
   targetDay = targetDay.plus({ days: 1 });
-} while (targetDay.month === firstDay.month);
+}
 
 console.log(bodyString);
