@@ -44,14 +44,10 @@ const firstDay = createFirstDay(year, month);
 const headerString = `      ${month}月 ${year}\n日 月 火 水 木 金 土`;
 console.log(headerString);
 
-let targetDay = firstDay;
 let bodyString = "";
+bodyString += firstDay.weekday !== 7 ? "   ".repeat(firstDay.weekday) : "";
 
-if (targetDay.weekday !== 7) {
-  for (let i = 1; i <= targetDay.weekday; i++) {
-    bodyString += "   ";
-  }
-}
+let targetDay = firstDay;
 
 while (targetDay.month === firstDay.month) {
   bodyString += String(targetDay.day).padStart(2, " ");
