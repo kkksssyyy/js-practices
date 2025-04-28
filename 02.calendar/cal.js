@@ -1,54 +1,42 @@
 #!/usr/bin/env node
 
 import minimist from "minimist";
-import { DateTime as LuxonDateTime } from "luxon";
-
-function getYearNumber(year, today) {
-  return year === undefined ? today.year : parseInt(year);
-}
-function getMonthNumber(month, today) {
-  return month === undefined ? today.month : parseInt(month);
-}
 
 function createFirstDay(year, month) {
-  const firstDay = LuxonDateTime.fromObject(
-    {
-      year: parseInt(year),
-      month: parseInt(month),
-      day: 1,
-    },
-    {
-      zone: "Asia/Tokyo",
-    },
-  );
+  const firstDay = new Date();
+  if (year !== undefined) {
+    firstDay.setFullYear(year);
+  }
+  if (month !== undefined) {
+    firstDay.setMonth(month - 1);
+  }
+  firstDay.setDate(1);
   return firstDay;
 }
 
 const args = minimist(process.argv.slice(2));
 
-const today = LuxonDateTime.now().setZone("Asia/Tokyo");
-
-const year = getYearNumber(args.y, today);
-const month = getMonthNumber(args.m, today);
+const year = args.y;
+const month = args.m;
 
 const firstDay = createFirstDay(year, month);
 
-const headerString = `      ${month}月 ${year}\n日 月 火 水 木 金 土`;
+const headerString = `      ${firstDay.getMonth() + 1}月 ${firstDay.getFullYear()}\n日 月 火 水 木 金 土`;
 console.log(headerString);
 
 let bodyString = "";
-bodyString += firstDay.weekday !== 7 ? "   ".repeat(firstDay.weekday) : "";
+bodyString += firstDay.getDay() !== 7 ? "   ".repeat(firstDay.getDay()) : "";
 
-let targetDay = firstDay;
+let targetDay = new Date(firstDay);
 
-while (targetDay.month === firstDay.month) {
-  bodyString += String(targetDay.day).padStart(2, " ");
-  if (targetDay.weekday === 6) {
+while (targetDay.getMonth() === firstDay.getMonth()) {
+  bodyString += String(targetDay.getDate()).padStart(2, " ");
+  if (targetDay.getDay() === 6) {
     bodyString += "\n";
   } else {
     bodyString += " ";
   }
-  targetDay = targetDay.plus({ days: 1 });
+  targetDay.setDate(targetDay.getDate() + 1);
 }
 
 console.log(bodyString);
