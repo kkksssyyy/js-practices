@@ -51,5 +51,9 @@ try {
 
   await runPromise(row.db, "DROP TABLE books");
 } catch (err) {
-  console.error("Error occurred:", err.message);
+  if (err.code === "SQLITE_ERROR") {
+    console.error("SQLエラーが発生しました:", err.message);
+  } else {
+    throw err;
+  }
 }
