@@ -2,30 +2,7 @@
 
 import sqlite3 from "sqlite3";
 import timers from "timers/promises";
-
-function runPromise(db, sql, params) {
-  return new Promise((resolve, reject) => {
-    db.run(sql, params, function (err) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve({ row: this, db: db });
-      }
-    });
-  });
-}
-
-function getPromise(db, sql, params) {
-  return new Promise((resolve, reject) => {
-    db.get(sql, params, function (err, row) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve({ row: row, db: db });
-      }
-    });
-  });
-}
+import { runPromise, getPromise } from "./db-utils.js";
 
 const db = new sqlite3.Database(":memory:");
 
